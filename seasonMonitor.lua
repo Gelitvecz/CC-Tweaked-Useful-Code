@@ -1,7 +1,7 @@
 local monitor = peripheral.find("monitor")
 local relay = peripheral.find("redstone_relay")
 
-function getSeason(per,str)
+function getSeason(per, str)
   if per.getAnalogInput("front") > 0 then
     if str == "number" then return per.getAnalogInput("front")
     else return "Spring" end
@@ -19,11 +19,11 @@ end
 function resetMonitor(per)
   per.setBackgroundColor(colors.white)
   per.setTextColor(colors.black)
-  per.setCursorPos(1,1)
+  per.setCursorPos(1, 1)
   per.setTextScale(1)
   per.clear()
 end
-function seasonExtra(num)
+function seasonExtras(num)
   if num <= 5 then return "Early"
   elseif num <= 10 then return "Mid"
   elseif num <= 15 then return "Late"
@@ -33,7 +33,7 @@ end
 while true do
   resetMonitor(monitor)
   season = getSeason(relay)
-  exSeason = seasonExtra(getSeason(relay,"number"))
-  monitor.write(("Season:%s %s"):format(exSeason,season))
+  seasonEx = seasonExtras(getSeason(relay, "number"))
+  monitor.write(("Season: %s %s"): format(seasonEx, season))
   sleep(1)
 end
